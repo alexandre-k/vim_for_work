@@ -7,11 +7,20 @@ call plug#begin('~/.vim/plugged')
 " For Javascript
 Plug 'marijnh/tern_for_vim' " To enable tags
 Plug 'claco/jasmine.vim'
-Plug 'burnettk/vim-angular' "for AngularJS
+"Plug 'burnettk/vim-angular' "for AngularJS
 Plug 'othree/yajs.vim' ", { 'for': 'javascript' }
 "Plug 'bigfish/vim-js-context-coloring'
 " Plug 'beautify-web/js-beautify' "To beautify ugly javascript files
 Plug 'othree/javascript-libraries-syntax.vim'
+Plug 'mxw/vim-jsx' "For JSX
+Plug 'bentayloruk/vim-react-es6-snippets'
+Plug 'jaxbot/syntastic-react' "ESLint for React.JS
+Plug 'joegesualdo/jsdoc.vim' "To generate JSDoc comments
+Plug 'isruslan/vim-es6' "For EcmaScript 6
+Plug 'moll/vim-node' "For NodeJS
+
+" Jade
+Plug 'jadejs/jade'
 
 " For Karma
 Plug 'maksimr/vim-karma'
@@ -225,7 +234,7 @@ let g:ctrlp_working_path_mode = 2
 nmap <leader>p :CtrlP<cr>
 "
 " " Easy bindings for its various modes
-nmap <leader>bb :CtrlPBuffer<cr>
+nmap <F4> :CtrlPBuffer<cr>
 nmap <leader>bm :CtrlPMixed<cr>
 nmap <leader>bs :CtrlPMRU<cr>"
 
@@ -294,3 +303,8 @@ let g:indent_guides_start_level = 2
 "======================
 " Disable ROPE mode of python mode
 let g:pymode_rope = 0
+
+"======================
+" To enable JSX support
+"======================
+let g:jsx_ext_required = 0
