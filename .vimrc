@@ -19,6 +19,9 @@ Plug 'joegesualdo/jsdoc.vim' "To generate JSDoc comments
 Plug 'isruslan/vim-es6' "For EcmaScript 6
 Plug 'moll/vim-node' "For NodeJS
 
+"GraphQL
+Plug 'jparise/vim-graphql'
+
 " Jade
 Plug 'jadejs/jade'
 
