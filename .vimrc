@@ -18,6 +18,18 @@ Plug 'jaxbot/syntastic-react' "ESLint for React.JS
 Plug 'joegesualdo/jsdoc.vim' "To generate JSDoc comments
 Plug 'isruslan/vim-es6' "For EcmaScript 6
 Plug 'moll/vim-node' "For NodeJS
+Plug 'othree/es.next.syntax.vim' "For EcmaScript 7
+Plug 'posva/vim-vue' "For vueJS
+
+" Java
+Plug 'rudes/vim-java'
+
+Plug 'hsanson/vim-android'
+Plug 'artur-shaik/vim-javacomplete2'
+Plug 'tfnico/vim-gradle'
+
+" To compile Java applications
+Plug 'tpope/vim-dispatch'
 
 "GraphQL
 Plug 'jparise/vim-graphql'
@@ -49,7 +61,7 @@ Plug 'tpope/vim-surround' "to easily surround expressions with quotes, etc
 Plug 'junegunn/vim-easy-align' "To align anything easily
 Plug 'nathanaelkane/vim-indent-guides' "To show visually the indent level
 
-" Plug 'valloric/youcompleteme' " Completion
+Plug 'valloric/youcompleteme' " Completion
 Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-fugitive' " For git
 Plug 'scrooloose/nerdtree'
@@ -57,7 +69,7 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'easymotion/vim-easymotion' " To search quickly
 
 " Snippets
-Plug 'honza/vim-snippets'
+" Plug 'honza/vim-snippets'
 Plug 'SirVer/ultisnips'
 Plug 'ervandew/supertab'
 
@@ -75,6 +87,12 @@ Plug 'majutsushi/tagbar' "To create tags. Need Exhuberant-ctags
 
 " Initialize plugin system
 call plug#end()
+
+" Disable arrow keys to move the cursor
+inoremap <Up> <Nop>
+inoremap <Down> <Nop>
+inoremap <Left> <Nop>
+inoremap <Right> <Nop>
 
 filetype plugin indent on    " required
 "syntax on
@@ -132,14 +150,39 @@ au Syntax * RainbowParenthesesLoadBraces
 
 """" End of settings for Rainbow parenthesis
 
+"===========================================
+" For youCompleteMe and UltiSnippets
+"===========================================
+" java completion
+set omnifunc=syntaxcomplete#Complete
+let g:EclimCompletionMethod='omnifunc'"
+"========
 let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 
-" Trigger configuration. Do not use <tab> if you use
-" https://github.com/Valloric/YouCompleteMe.
+" ycm options
+" let g:ycm_global_ycm_extra_conf = '/usr/share/vim/vimfiles/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
+let g:ycm_show_diagnostics_ui = 0
+let g:ycm_auto_trigger = 1
+let g:ycm_add_preview_to_completeopt = 0
+let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_autoclose_preview_window_after_insertion = 1
+let g:ycm_confirm_extra_conf = 0
+let g:ycm_min_num_of_chars_for_completion = 2
+" let g:ycm_use_ultisnips_completer = 1
+let g:EclimCompletionMethod = 'omnifunc'
+let g:ycm_python_binary_path = 'python2'
+""""SuperTab
+let g:SuperTabDefaultCompletionType = '<C-n>'
+" let g:SuperTabDefaultCompletionType = "context"
+" let g:SuperTabCompletionContexts = ['s:ContextText', 's:ContextDiscover']
+" let g:SuperTabContextTextOmniPrecedence = ['&omnifunc', '&completefunc']
+
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+let g:UltiSnipsEditSplit = 'horizontal'
+let g:UltiSnipsSnippetDirectories = ["snips"]
 
 """"" NerdCommenter
 " Add spaces after comment delimiters by default
@@ -162,11 +205,6 @@ nmap <Leader>L <Plug>(easymotion-overwin-line)
 " Move to word
 map  <Leader>w <Plug>(easymotion-bd-w)
 nmap <Leader>w <Plug>(easymotion-overwin-w)
-
-""""SuperTab
-let g:SuperTabDefaultCompletionType    = '<C-n>'
-let g:SuperTabCrMapping = 0
-
 
 
 """" GENERAL SETTINGS"""
@@ -298,10 +336,6 @@ map <Leader>k :call RunCurrentSpecFile()<CR>
 " map <Leader>s :call RunNearestSpec()<CR>
 " map <Leader>a :call RunAllSpecs()<CR>
 "
-"======================
-" Indentation
-" =====================
-let g:indent_guides_start_level = 2
 
 "======================
 " Disable ROPE mode of python mode
@@ -311,3 +345,31 @@ let g:pymode_rope = 0
 " To enable JSX support
 "======================
 let g:jsx_ext_required = 0
+
+"======================
+" JavaComplete2
+"======================
+nmap <F6> <Plug>(JavaComplete-Imports-AddSmart)
+imap <F6> <Plug>(JavaComplete-Imports-AddSmart)
+
+"====================================
+" Open gradle file with groovy syntax
+" ===================================
+au BufRead,BufNewFile *.gradle set filetype=groovy
+
+"====================================
+" Java autocompletion
+" ===================================
+set omnifunc=syntaxcomplete#Complete
+let g:EclimCompletionMethod = 'omnifunc'
+
+
+"====================================
+" Indent guide
+"====================================
+let g:indent_guides_auto_colors = 0
+let g:indent_guides_start_level = 2
+let g:indent_guides_guide_size = 1
+
+hi IndentGuidesOdd  ctermbg=white
+hi IndentGuidesEven ctermbg=lightgrey
